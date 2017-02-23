@@ -18,9 +18,10 @@ public class Application {
         ScheduleChangeAnalyzer scheduleChangeAnalyzer = (ScheduleChangeAnalyzer) context.getBean("scheduleChangeAnalyzer");
         Booking bookingForSCAnalyzer = BookingFactory.createBookingForSCAnalyzer();
         scheduleChangeAnalyzer.analyze(bookingForSCAnalyzer);
+        System.out.println("Dla gita");
 
 
-        
+
 
 
     }
