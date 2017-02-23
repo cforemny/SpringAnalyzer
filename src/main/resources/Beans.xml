@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="scheduleChangeAnalyzer" class="com.spring.analyzer.ScheduleChangeAnalizer.ScheduleChangeAnalyzer">
+        <constructor-arg index="0" ref="mailSender"/>
+        <constructor-arg index="1" ref="przykladowyPrzygotowywacz"/>
+        <constructor-arg index="2" ref="changedSchedule"/>
+    </bean>
+
+    <bean id="przykladowyPrzygotowywacz" class="com.spring.analyzer.ScheduleChangeAnalizer.PrzykladowyPrzygotowywacz">
+        <constructor-arg index="0" ref="emailListAsString"/>
+        <constructor-arg index="1" ref="mailCreator"/>
+    </bean>
+    <bean id="messageCreator" class="com.spring.analyzer.ScheduleChangeAnalizer.Schedule.MessageCreator">
+        <constructor-arg index="0" ref="changedSchedule"/>
+        <constructor-arg index="1" ref="alternativeSchedule"/>
+
+    </bean>
+    <bean id="changedSchedule" class="com.spring.analyzer.ScheduleChangeAnalizer.Schedule.ChangedSchedule"/>
+    <bean id="mailCreator" class="com.spring.analyzer.ScheduleChangeAnalizer.Mail.MailCreator">
+         <constructor-arg index="0" ref="messageCreator"/>
+        <constructor-arg index="1" ref="activationCodeCreator"/>
+        </bean>
+
+    <bean id="emailListAsString" class="com.spring.analyzer.ScheduleChangeAnalizer.Mail.EmailListAsString">
+        <constructor-arg index="0" ref="emailList"/>
+        <constructor-arg index="1" ref="list"/>
+    </bean>
+
+    <bean id="mailSender" class="com.spring.analyzer.ScheduleChangeAnalizer.Mail.MailSender"/>
+    <bean id="alternativeSchedule" class="com.spring.analyzer.ScheduleChangeAnalizer.Schedule.AlternativeSchedule"/>
+    <bean id="activationCodeCreator" class="com.spring.analyzer.ScheduleChangeAnalizer.activationCode.ActivationCodeCreator">
+        <constructor-arg index="0" ref="changedSchedule"/>
+        <constructor-arg index="1" ref="nameFirstLetter"/>
+        <constructor-arg index="2" ref="activationCode"/>
+    </bean>
+    <bean id="mailSeeker" class="com.spring.analyzer.ScheduleChangeAnalizer.Mail.MailSeeker">
+        <constructor-arg index="0" ref="mailSpliter"/>
+        <constructor-arg index="1" ref="changedSchedule"/>
+    </bean>
+    <bean id="mailSpliter" class="com.spring.analyzer.ScheduleChangeAnalizer.Mail.MailSpliter"/>
+    <bean id="emailList" class="com.spring.analyzer.ScheduleChangeAnalizer.Mail.EmailList">
+        <constructor-arg  ref="mailSeeker"/>
+    </bean>
+    <bean id="list" class="java.lang.StringBuilder"/>
+    <bean id="nameFirstLetter" class="com.spring.analyzer.ScheduleChangeAnalizer.activationCode.NameFirstLetter"/>
+    <bean id="activationCode" class="java.lang.StringBuilder"/>
+
+
+</beans>
